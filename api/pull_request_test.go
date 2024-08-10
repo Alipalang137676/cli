@@ -1,4 +1,44 @@
-package api
+بسته api
+
+واردات (
+	"encoding/json"
+	"آزمایش"
+)
+
+func TestPullRequest_ChecksStatus(t *testing.T) {
+	pr := PullRequest{}
+	محموله := `
+	{ "commits": { "nodes": [{ "commit": {
+		"statusCheckRollup": {
+			"زمینه ها": {
+				"گره ها": [
+					{ "state": "SUCCESS" },
+					{ "state": "PENDING" },
+					{ "state": "FAILURE" },
+					{ "وضعیت": "IN_PROGRESS",
+					  "نتیجه گیری": null }،
+					{ "وضعیت": "تکمیل شده",
+					  "نتیجه گیری": "موفقیت" }،
+					{ "وضعیت": "تکمیل شده",
+					  "نتیجه گیری": "شکست" }،
+					{ "وضعیت": "تکمیل شده",
+					  "نتیجه گیری": "ACTION_REQUIRED" }،
+					{ "وضعیت": "تکمیل شده",
+					  "نتیجه گیری": "STALE" }
+				]
+			}
+		}
+	} }] } }
+	`
+	err := json.Unmarshal([]byte(payload)، &pr)
+	معادله (t، خطا، صفر)
+
+	چک ها:= pr.ChecksStatus()
+	معادله (t، چک. مجموع، 8)
+	معادله (t، چک‌ها. در انتظار، 3)
+	معادله (t، بررسی می کند. شکست، 3)
+	معادله (t، چک. پاس، 2)
+}Root on package api
 
 import (
 	"encoding/json"
